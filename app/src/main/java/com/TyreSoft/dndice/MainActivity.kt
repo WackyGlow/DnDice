@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color.*
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.SeekBar
 import android.widget.Switch
 import android.widget.Toast
@@ -11,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import java.util.*
 import kotlinx.android.synthetic.main.activity_main.*
+import java.nio.channels.InterruptedByTimeoutException
+
 class MainActivity : AppCompatActivity() {
     private val TAG: String = "xyz"
     private var dieType: String = ""
@@ -38,11 +41,13 @@ class MainActivity : AppCompatActivity() {
                 twDiceAmount.text = "Dice Amount: " + skbDiceAmount.progress
             }
         })
-        btnHistory.setOnClickListener{val intet = Intent(this@MainActivity, RollHistory::class.java)
+        btnHistory.setOnClickListener{val intet = Intent(this, RollHistory::class.java)
             val b = Bundle()
             b.putStringArrayList("history",historyList)
             intet.putExtras(b)
-            startActivity(intent)}
+            startActivity(intent)
+
+        }
         btnRoll.setOnClickListener{v -> onClickRoll(skbDiceAmount.progress)}
         iwTetra.setOnClickListener { v -> selectDiceType("d4") }
         iwCube.setOnClickListener { v -> selectDiceType("d6") }

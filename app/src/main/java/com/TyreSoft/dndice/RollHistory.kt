@@ -14,7 +14,6 @@ class RollHistory : AppCompatActivity() {
             historyList.addAll(historyBundle.getStringArrayList("history")!!)
         }
         setContentView(R.layout.activity_history)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         btnBack.setOnClickListener{
             finish()
         }
@@ -24,5 +23,6 @@ class RollHistory : AppCompatActivity() {
             historyList.reversed()
         )
         lwHistory.adapter = arrayAdapter
+
     }
 }
