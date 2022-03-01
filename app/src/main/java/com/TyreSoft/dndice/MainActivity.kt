@@ -2,17 +2,23 @@ package com.TyreSoft.dndice
 
 import android.content.Intent
 import android.graphics.Color.*
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.SeekBar
 import android.widget.Switch
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import java.util.*
 import kotlinx.android.synthetic.main.activity_main.*
 import java.nio.channels.InterruptedByTimeoutException
+import java.sql.Time
+import java.time.Instant.now
+import java.time.LocalDateTime
+import java.time.LocalTime
 
 class MainActivity : AppCompatActivity() {
     private val TAG: String = "xyz"
@@ -106,6 +112,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun onClickRoll(howMany: Int){
         if ( howMany > 0 || howMany <= 6) {
             println("throwing the " + dieType)
@@ -113,7 +120,7 @@ class MainActivity : AppCompatActivity() {
                 println("dice number: $i")
                 rollDice()
             }
-            historyList.add(resultList.toString())
+            historyList.add(LocalTime.now().toString() + ": " + dieType + resultList.toString())
             resultList.clear()
         }
     }
