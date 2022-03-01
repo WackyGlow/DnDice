@@ -41,10 +41,10 @@ class MainActivity : AppCompatActivity() {
                 twDiceAmount.text = "Dice Amount: " + skbDiceAmount.progress
             }
         })
-        btnHistory.setOnClickListener{val intet = Intent(this, RollHistory::class.java)
+        btnHistory.setOnClickListener{val intent = Intent(this, RollHistory::class.java)
             val b = Bundle()
             b.putStringArrayList("history",historyList)
-            intet.putExtras(b)
+            intent.putExtras(b)
             startActivity(intent)
 
         }
