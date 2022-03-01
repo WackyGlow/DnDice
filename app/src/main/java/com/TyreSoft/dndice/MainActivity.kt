@@ -19,6 +19,7 @@ import java.sql.Time
 import java.time.Instant.now
 import java.time.LocalDateTime
 import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 
 class MainActivity : AppCompatActivity() {
     private val TAG: String = "xyz"
@@ -120,7 +121,8 @@ class MainActivity : AppCompatActivity() {
                 println("dice number: $i")
                 rollDice()
             }
-            historyList.add(LocalTime.now().toString() + ": " + dieType + resultList.toString())
+            val dateTime = LocalDateTime.now()
+            historyList.add(dateTime.format(DateTimeFormatter.ofPattern("M/d/y H:m:ss")) + ": " + dieType + resultList.toString())
             resultList.clear()
         }
     }
