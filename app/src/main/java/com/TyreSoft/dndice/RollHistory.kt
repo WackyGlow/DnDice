@@ -1,10 +1,9 @@
 package com.TyreSoft.dndice
 import android.os.Bundle
 import android.widget.ArrayAdapter
-import android.widget.Button
 import android.widget.ListAdapter
-import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_history.*
 
 class RollHistory : AppCompatActivity() {
     private val historyList: ArrayList<String> = arrayListOf()
@@ -14,5 +13,16 @@ class RollHistory : AppCompatActivity() {
         if (historyBundle != null) {
             historyList.addAll(historyBundle.getStringArrayList("history")!!)
         }
+        setContentView(R.layout.activity_history)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        btnBack.setOnClickListener{
+            finish()
+        }
+        val arrayAdapter: ListAdapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_list_item_1,
+            historyList.reversed()
+        )
+        lwHistory.adapter = arrayAdapter
     }
 }
