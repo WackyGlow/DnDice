@@ -1,9 +1,11 @@
 package com.TyreSoft.dndice
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.Color.*
 import android.os.Build
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
 import android.widget.SeekBar
@@ -22,15 +24,23 @@ import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
 class MainActivity : AppCompatActivity() {
+    private var mValue: Int = 0
     private val TAG: String = "xyz"
     private var dieType: String = ""
-    val resultList: MutableList<Int> = mutableListOf()
+    var resultList: MutableList<Int> = mutableListOf()
 
     private val mRandomGenerator = Random()
-    private val historyList: ArrayList<String> = arrayListOf()
+    private var historyList: ArrayList<String> = arrayListOf()
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT){}
+
+        if (savedInstanceState != null){
+            mValue = savedInstanceState.getInt("mValue")
+        }
         skbDiceAmount.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(skbDiceAmount: SeekBar, p1: Int, p2: Boolean) {
                 /**
@@ -60,6 +70,44 @@ class MainActivity : AppCompatActivity() {
         iwCube.setOnClickListener { v -> selectDiceType("d6") }
         iwOcta.setOnClickListener { v -> selectDiceType("d8") }
         Log.d(TAG, "onCreate")
+    }
+
+    override fun onSaveInstanceState(savedInstanceState: Bundle) {
+        super.onSaveInstanceState(savedInstanceState)
+        savedInstanceState.putString("rolledDice", twRolledDice.text.toString())
+        savedInstanceState.putString("diceAmount", twDiceAmount.text.toString())
+        savedInstanceState.putString("dieType", dieType)
+        savedInstanceState.putStringArrayList("history",historyList)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        twRolledDice.text = savedInstanceState.getString("rolledDice")
+        twDiceAmount.text = savedInstanceState.getString("diceAmount")
+        dieType = savedInstanceState.getString("dieType").toString()
+        historyList = savedInstanceState.getStringArrayList("history") as ArrayList<String>
+        when (dieType){
+            "d4" -> {
+                dieType = "d4"
+                iwTetra.setBackgroundColor(GREEN)
+                iwCube.setBackgroundColor(WHITE)
+                iwOcta.setBackgroundColor(WHITE)
+            }
+            "d6" -> {
+                dieType = "d6"
+                iwCube.setBackgroundColor(GREEN)
+                iwTetra.setBackgroundColor(WHITE)
+                iwOcta.setBackgroundColor(WHITE)
+            }
+            "d8" -> {
+                dieType = "d8"
+                iwOcta.setBackgroundColor(GREEN)
+                iwCube.setBackgroundColor(WHITE)
+                iwTetra.setBackgroundColor(WHITE)
+            }
+        }
+
+
     }
 
     private fun selectDiceType(dicetype : String){

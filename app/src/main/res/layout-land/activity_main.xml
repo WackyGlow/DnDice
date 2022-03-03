@@ -50,23 +50,24 @@
             android:layout_weight="1"
             android:background="#FFFFFF"
             app:srcCompat="@drawable/octahedron" />
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="175sp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/twRolledDice"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
             android:text="Rolled Dice Here"
             android:textAlignment="center"
             android:textSize="34sp" />
+
     </LinearLayout>
 
     <SeekBar
@@ -74,7 +75,7 @@
         style="@style/Widget.AppCompat.SeekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="500dp"
+        android:layout_marginTop="215sp"
         android:max="6"
         android:min="1"
         android:thumb="@drawable/circle"
@@ -85,7 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="450dp"
+        android:layout_marginTop="230sp"
         android:text="Dice Amount: 1"
         android:textSize="34sp" />
 
@@ -94,8 +95,7 @@
         android:layout_width="100dp"
         android:layout_height="60dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="550dp"
-        android:onClick="historyOnClick"
+        android:layout_marginTop="275sp"
         android:text="History" />
 
     <Button
